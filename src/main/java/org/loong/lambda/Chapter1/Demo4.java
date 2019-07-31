@@ -7,19 +7,19 @@ import java.util.function.Supplier;
 public class Demo4 {
     public static void main(String[] args) {
                                     //s是参数，右边是执行体
-        //Consumer<String> consumer = s -> System.out.println(12);
+        Consumer<String> consumer1 = s -> System.out.println(12);
 
-        //当只有一个函数调用，并且使用的参数名是一样的话，可缩写成方法引用的方式
-        Consumer<String> consumer = System.out::println;
+        // 当只有一个函数调用，并且使用的参数名是一样的话，可缩写成方法引用的方式
+        Consumer<String> consumer2 = System.out::println;
 
-        ADemo4 aDemo4 = new ADemo4();
         //静态调用、构造3种方式的调用
         Function<String,String> function1 = ADemo4::add;
         function1.apply("ADemo4::add");
         //实例调用
+        ADemo4 aDemo4 = new ADemo4();
         Function<Integer,Integer> function2 = aDemo4::add;
         function2.apply(2);
-        //构造调用（没有输入值，只有输出（输出当前实例），所以Supplier是提供者）
+        //构造调用
         Supplier<ADemo4> supplier = ADemo4::new;
         supplier.get();
     }
