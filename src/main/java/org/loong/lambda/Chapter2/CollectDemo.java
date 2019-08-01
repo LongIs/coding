@@ -88,6 +88,7 @@ enum Gender {
 enum Grade {
     ONE, TWO, THREE, FOUR;
 }
+
 public class CollectDemo {
     public static void main(String[] args) {
         // 测试数据
