@@ -1,8 +1,11 @@
 package org.loong.lambda.Chapter1;
 
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Demo4 {
     public static void main(String[] args) {
@@ -12,7 +15,7 @@ public class Demo4 {
         // 当只有一个函数调用，并且使用的参数名是一样的话，可缩写成方法引用的方式
         Consumer<String> consumer2 = System.out::println;
 
-        //静态调用、构造3种方式的调用
+        //静态调用(调用static方法)
         Function<String,String> function1 = ADemo4::add;
         function1.apply("ADemo4::add");
         //实例调用
@@ -22,6 +25,8 @@ public class Demo4 {
         //构造调用
         Supplier<ADemo4> supplier = ADemo4::new;
         supplier.get();
+
+        List<Long> l1 = new ArrayList<>();
     }
 }
 class ADemo4{
@@ -36,6 +41,8 @@ class ADemo4{
         System.out.println(s);
         return "测试";
     }
+
+
 
     private String name;
 
