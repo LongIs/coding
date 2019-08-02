@@ -106,27 +106,28 @@ public class CollectDemo {
                 new Student("小马", 14, Gender.FEMALE, Grade.FOUR),
                 new Student("小刘", 13, Gender.MALE, Grade.FOUR));
 
-        //返回list或set
+        // 返回list或set
         List<Integer> collect = students.stream().map(Student::getAge).collect(Collectors.toList());
         Set<Integer> collect1 = students.stream().map(Student::getAge).collect(Collectors.toSet());
 
-        //返回指定的
-        TreeSet<Integer> collect2 = students.stream().map(Student::getAge).
-                collect(Collectors.toCollection(TreeSet::new));
+        // 返回指定的
+        TreeSet<Integer> collect2 = students.stream().map(Student::getAge).collect(Collectors.toCollection(TreeSet::new));
 
-        //统计所有年龄
-        students.stream().collect(Collectors.summarizingInt(Student::getAge));
+        // 将所有的name拼接成字符串，以逗号分割
+        String joined = students.stream().map(Student::getName).collect(Collectors.joining(", "));
 
-        //分块
-        Map<Boolean, List<Student>> collect3 = students.stream().
-                collect(Collectors.partitioningBy(s -> s.getGender() == Gender.MALE));
+        // 统计年龄
+        int total = students.stream().collect(Collectors.summingInt(Student::getAge));
 
-        //分组
+        // 根据boolean值进行分组
+        Map<Boolean, List<Student>> collect3 = students.stream().collect(Collectors.partitioningBy(s -> s.getGender() == Gender.MALE));
+
+        // 按班级分组
         Map<Grade, List<Student>> collect4 = students.stream().collect(Collectors.groupingBy(Student::getGrade));
 
-        //得到所有班级学生个数(也有平均值等)
-        Map<Grade, Long> collect5 = students.stream().
-                collect(Collectors.groupingBy(Student::getGrade, Collectors.counting()));
-
+        // 统计每个班级学生个数
+        Map<Grade, Long> collect5 = students.stream().collect(Collectors.groupingBy(Student::getGrade, Collectors.counting()));
+        // 统计每个班级学生年龄 summingXXX、平均值 averagingXXX
+        Map<Grade, Long> collect6 = students.stream().collect(Collectors.groupingBy(Student::getGrade, Collectors.summingLong(Student::getAge)));
     }
 }
